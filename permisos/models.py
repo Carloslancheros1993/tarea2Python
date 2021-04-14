@@ -2,8 +2,7 @@ from django.db import models
 from empleados.models import Empleado
 
 class Permiso(models.Model):
-    dias = models.IntegerField()
-    remunerado = models.BooleanField()
+    nombre = models.CharField(max_length=200, default="tipo de incapacidad")
     empleado = models.ForeignKey(
         Empleado,
         related_name='permisos',
@@ -11,6 +10,4 @@ class Permiso(models.Model):
         null=True
     )
 
-    def __str__(self):
-        return self.nombre
 
