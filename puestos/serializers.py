@@ -5,4 +5,4 @@ from puestos.models import Puesto
 class PuestoSerializer(ModelSerializer):
     class Meta:
         model = Puesto
-        fields = ('id', 'cargo', 'area')
+        fields = ('__all__')
