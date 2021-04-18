@@ -16,3 +16,14 @@ class PermisoDetailGenericView(generics.RetrieveUpdateDestroyAPIView):
 class PermisoViewSet(ModelViewSet):
     queryset = Permiso.objects.all()
     serializer_class = PermisoSerializer
+
+    # Filtrar
+    def get_queryset(self):
+        data = {}
+        for key, value in self.request.query_params.items():
+            if key in ['empleados']:
+                data[key + '__in'] = value
+                continue
+            data[key + '__in'] = value
+        print(data)
+        return self.queryset.filter(**data)

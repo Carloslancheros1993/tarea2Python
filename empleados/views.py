@@ -21,6 +21,17 @@ class EmpleadoViewSet(ModelViewSet):
     queryset = Empleado.objects.all()
     serializer_class = EmpleadoSerializer
 
+    #Filtrar
+    def get_queryset(self):
+        data = {}
+        for key, value in self.request.query_params.items():
+            if key in ['puestos']:
+                data[key + '__in'] = value
+                continue
+            data[key + '__in'] = value
+        print(data)
+        return self.queryset.filter(**data)
+
     def get_serializer_class(self, *args, **kwargs):
        if self.action == 'retrieve':
           return DetailEmpleadoSerializer
